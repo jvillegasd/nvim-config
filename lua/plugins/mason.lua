@@ -66,15 +66,6 @@ return {
                     },
                 },
             })
-            --- Arduino
-            vim.lsp.config('arduino_language_server', {
-                cmd = {
-                    "arduino-language-server",
-                    "-cli-config", "/home/zkrallah/.arduino15/arduino-cli.yaml",
-                    "-fqbn", "esp32:esp32:esp32"
-                },
-                capabilities = capabilities,
-            })
         end,
     }
 }
