@@ -16,6 +16,26 @@ end
 -- Core
 map("n", "<leader>w", "<CMD>update<CR>", "Save file")
 map("n", "<leader>q", "<CMD>q<CR>", "Quit window")
+map("n", "<leader>h", "<CMD>nohlsearch<CR>", "Clear search highlight")
+
+
+-- Buffers — <leader>b* + [b / ]b
+map("n", "]b", "<CMD>bnext<CR>", "Buffer: next")
+map("n", "[b", "<CMD>bprevious<CR>", "Buffer: previous")
+map("n", "<leader>bd", "<CMD>bdelete<CR>", "Buffer: delete")
+
+
+-- Editing ergonomics
+map("n", "<C-d>", "<C-d>zz", "Scroll half-page down (centered)")
+map("n", "<C-u>", "<C-u>zz", "Scroll half-page up (centered)")
+map("n", "n", "nzzzv", "Next search match (centered)")
+map("n", "N", "Nzzzv", "Prev search match (centered)")
+map("v", "<", "<gv", "Indent left (keep selection)")
+map("v", ">", ">gv", "Indent right (keep selection)")
+map("n", "<A-j>", "<CMD>m .+1<CR>==", "Move line down")
+map("n", "<A-k>", "<CMD>m .-2<CR>==", "Move line up")
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", "Move selection down")
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", "Move selection up")
 
 
 -- Splits — <leader>s*
@@ -60,6 +80,8 @@ map("n", "<leader>fh", telescope("help_tags"), "Telescope: help tags")
 map("n", "<leader>fr", telescope("oldfiles"), "Telescope: recent files")
 map("n", "<leader>fk", telescope("keymaps"), "Telescope: keymaps")
 map("n", "<leader>fd", telescope("diagnostics"), "Telescope: diagnostics")
+map("n", "<leader>fw", telescope("grep_string"), "Telescope: word under cursor")
+map("n", "<leader>fp", telescope("resume"), "Telescope: resume last picker")
 map("n", "<leader>fc", function()
     require("telescope.builtin").colorscheme({ enable_preview = true })
 end, "Telescope: colorscheme")
@@ -113,6 +135,7 @@ map("n", "<leader>dt", dap_call("terminate"), "DAP: terminate")
 map("n", "<leader>tf", "<CMD>ToggleTerm direction=float<CR>", "Terminal: float")
 map("n", "<leader>th", "<CMD>ToggleTerm direction=horizontal<CR>", "Terminal: horizontal")
 map("n", "<leader>tv", "<CMD>ToggleTerm direction=vertical<CR>", "Terminal: vertical")
+map("t", "<Esc><Esc>", [[<C-\><C-n>]], "Terminal: back to normal mode")
 
 
 -- Luasnip — insert/select mode jumps
