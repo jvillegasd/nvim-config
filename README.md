@@ -112,6 +112,8 @@ All plugin files contain **setup only** — no keymaps. Every mapping lives in
 | [which-key.nvim](https://github.com/folke/which-key.nvim) | Leader-prefix popup |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git gutter signs, hunk staging, blame |
 | [catppuccin/nvim](https://github.com/catppuccin/nvim) | Colorscheme (mocha flavour) |
+| [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Bottom statusline (mode, branch, diagnostics, LSP, position) |
+| [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim) | Top winbar breadcrumbs (file > scope > symbol) |
 
 Languages pre-configured for LSP: Lua (`lua_ls`), Python (`pyright`),
 TypeScript (`ts_ls`). Debuggers: C++ (`cppdbg`, `codelldb`), Python (`debugpy`).
@@ -261,6 +263,12 @@ Use `<leader>fk` for a fuzzy-searchable Telescope view of every mapping.
 | `<C-k>` | Expand or jump forward |
 | `<C-j>` | Jump backward |
 | `<C-l>` | Next choice in a choice node |
+
+### Breadcrumbs (dropbar)
+
+| Key | Action |
+|---|---|
+| `<leader>;` | Pick a breadcrumb segment from the winbar |
 
 ## Completion (nvim-cmp)
 
