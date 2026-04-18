@@ -4,48 +4,56 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = function()
         local p = require("catppuccin.palettes").get_palette("mocha")
-        local bar_bg = p.mantle
-        local section_bg = p.surface0
+        local bar_bg = p.base
+        local muted = p.overlay1
+
+        local base_mode = {
+            b = { fg = muted, bg = bar_bg },
+            c = { fg = p.text, bg = bar_bg },
+            x = { fg = muted, bg = bar_bg },
+            y = { fg = muted, bg = bar_bg },
+            z = { fg = muted, bg = bar_bg },
+        }
+        local function mode_section(accent)
+            return vim.tbl_extend("force", base_mode, {
+                a = { fg = accent, bg = bar_bg, gui = "bold" },
+            })
+        end
 
         local theme = {
-            normal = {
-                a = { fg = p.base, bg = p.green, gui = "bold" },
-                b = { fg = p.text, bg = section_bg },
-                c = { fg = p.text, bg = bar_bg },
-            },
-            insert = {
-                a = { fg = p.base, bg = p.mauve, gui = "bold" },
-                b = { fg = p.text, bg = section_bg },
-                c = { fg = p.text, bg = bar_bg },
-            },
-            visual = {
-                a = { fg = p.base, bg = p.peach, gui = "bold" },
-                b = { fg = p.text, bg = section_bg },
-                c = { fg = p.text, bg = bar_bg },
-            },
-            replace = {
-                a = { fg = p.base, bg = p.red, gui = "bold" },
-                b = { fg = p.text, bg = section_bg },
-                c = { fg = p.text, bg = bar_bg },
-            },
-            command = {
-                a = { fg = p.base, bg = p.yellow, gui = "bold" },
-                b = { fg = p.text, bg = section_bg },
-                c = { fg = p.text, bg = bar_bg },
-            },
+            normal = mode_section(p.mauve),
+            insert = mode_section(p.green),
+            visual = mode_section(p.peach),
+            replace = mode_section(p.red),
+            command = mode_section(p.sky),
             inactive = {
-                a = { fg = p.overlay1, bg = bar_bg, gui = "bold" },
-                b = { fg = p.overlay1, bg = bar_bg },
-                c = { fg = p.overlay1, bg = bar_bg },
+                a = { fg = muted, bg = bar_bg },
+                b = { fg = muted, bg = bar_bg },
+                c = { fg = muted, bg = bar_bg },
+                x = { fg = muted, bg = bar_bg },
+                y = { fg = muted, bg = bar_bg },
+                z = { fg = muted, bg = bar_bg },
             },
         }
+
+        local function cwd()
+            return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+        end
+
+        local function lsp_names()
+            local clients = vim.lsp.get_clients({ bufnr = 0 })
+            if #clients == 0 then return "" end
+            local names = {}
+            for _, c in ipairs(clients) do table.insert(names, c.name) end
+            return table.concat(names, ", ")
+        end
 
         return {
             options = {
                 theme = theme,
                 icons_enabled = true,
-                component_separators = { left = "", right = "" },
-                section_separators = { left = "", right = "" },
+                component_separators = "",
+                section_separators = "",
                 globalstatus = true,
                 disabled_filetypes = {
                     statusline = { "neo-tree", "dapui_scopes", "dapui_breakpoints",
@@ -53,29 +61,40 @@ return {
                 },
             },
             sections = {
-                lualine_a = { "mode" },
+                lualine_a = { { "mode", icon = "" } },
                 lualine_b = {
-                    { "branch", icon = "", color = { fg = p.green } },
-                    { "diff", colored = true },
-                    { "diagnostics", colored = true },
+                    { "progress", color = { fg = muted } },
+                    { "location", color = { fg = muted } },
                 },
-                lualine_c = { { "filename", path = 1 } },
+                lualine_c = {
+                    {
+                        "diagnostics",
+                        sources = { "nvim_diagnostic" },
+                        symbols = { error = "● ", warn = "● ", info = "● ", hint = "● " },
+                        colored = true,
+                    },
+                },
                 lualine_x = {
                     {
-                        function()
-                            local clients = vim.lsp.get_clients({ bufnr = 0 })
-                            if #clients == 0 then return "" end
-                            local names = {}
-                            for _, c in ipairs(clients) do table.insert(names, c.name) end
-                            return " " .. table.concat(names, ", ")
-                        end,
-                        color = { fg = p.sky },
+                        lsp_names,
+                        icon = { "", color = { fg = muted } },
+                        color = { fg = muted },
                     },
-                    { "encoding", color = { fg = p.subtext1 } },
-                    { "filetype", color = { fg = p.teal } },
                 },
-                lualine_y = { "progress" },
-                lualine_z = { "location" },
+                lualine_y = {
+                    { "filename", path = 0, color = { fg = p.text } },
+                },
+                lualine_z = {
+                    { cwd, icon = { "", color = { fg = muted } }, color = { fg = muted } },
+                },
+            },
+            inactive_sections = {
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = { { "filename", path = 1, color = { fg = muted } } },
+                lualine_x = { { "location", color = { fg = muted } } },
+                lualine_y = {},
+                lualine_z = {},
             },
         }
     end,
