@@ -4,6 +4,8 @@ return {
     event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+        ---@diagnostic disable-next-line: different-requires
+        local ctp_theme = require("catppuccin.special.bufferline").get_theme()
         require("bufferline").setup({
             options = {
                 mode = "buffers",
@@ -13,14 +15,14 @@ return {
                 always_show_bufferline = true,
                 offsets = {
                     {
-                        filetype = "neo-tree",
+                        filetype = "snacks_layout_box",
                         text = "Explorer",
                         text_align = "left",
                         separator = true,
                     },
                 },
             },
-            highlights = require("catppuccin.special.bufferline").get_theme(),
+            highlights = ctp_theme,
         })
     end,
 }
