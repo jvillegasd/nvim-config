@@ -22,7 +22,9 @@ map("n", "<leader>h", "<CMD>nohlsearch<CR>", "Clear search highlight")
 -- Buffers — <leader>b* + [b / ]b
 map("n", "]b", "<CMD>bnext<CR>", "Buffer: next")
 map("n", "[b", "<CMD>bprevious<CR>", "Buffer: previous")
-map("n", "<leader>bd", "<CMD>bdelete<CR>", "Buffer: delete")
+map("n", "<leader>bd", function() Snacks.bufdelete() end, "Buffer: delete (keep window)")
+map("n", "<leader>bo", function() Snacks.bufdelete.other() end, "Buffer: delete others")
+map("n", "<leader>ba", function() Snacks.bufdelete.all() end, "Buffer: delete all")
 
 
 -- Editing ergonomics
@@ -93,6 +95,8 @@ map("n", "<leader>gf", telescope("git_files"), "Git: files")
 map("n", "<leader>gb", telescope("git_branches"), "Git: branches")
 map("n", "<leader>gs", telescope("git_status"), "Git: status")
 map("n", "<leader>gc", telescope("git_commits"), "Git: commits")
+map("n", "<leader>gl", function() Snacks.lazygit() end, "Git: lazygit")
+map("n", "<leader>gB", function() Snacks.gitbrowse() end, "Git: open in browser")
 
 
 -- Git hunks (gitsigns) — <leader>gh* + [h / ]h
