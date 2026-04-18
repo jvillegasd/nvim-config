@@ -121,6 +121,7 @@ All plugin files contain **setup only** — no keymaps. Every mapping lives in
 | [snacks.nvim](https://github.com/folke/snacks.nvim) | Utility suite: bigfile perf, notifier, indent guides, scope, word highlight, statuscolumn |
 | [fidget.nvim](https://github.com/j-hui/fidget.nvim) | LSP progress spinner in bottom-right |
 | [nvim-autopairs](https://github.com/windwp/nvim-autopairs) | Auto-close brackets / quotes; inserts `()` on function-name completion |
+| [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) | In-buffer markdown rendering (headings, bullets, checkboxes, code fences, tables) |
 
 Languages pre-configured for LSP: Lua (`lua_ls`), Python (`pyright`),
 TypeScript (`ts_ls`). Debuggers: C++ (`cppdbg`, `codelldb`), Python (`debugpy`).
