@@ -147,10 +147,11 @@ map("n", "<leader>du", function() require("dapui").toggle() end, "DAP: toggle UI
 map("n", "<leader>dt", dap_call("terminate"), "DAP: terminate")
 
 
--- Terminal — <F7> handled by toggleterm; <leader>t* for directional variants
-map("n", "<leader>tf", "<CMD>ToggleTerm direction=float<CR>", "Terminal: float")
-map("n", "<leader>th", "<CMD>ToggleTerm direction=horizontal<CR>", "Terminal: horizontal")
-map("n", "<leader>tv", "<CMD>ToggleTerm direction=vertical<CR>", "Terminal: vertical")
+-- Terminal (snacks) — <F7> toggles floating; <leader>t* for directional variants
+map("n", "<F7>", function() Snacks.terminal() end, "Terminal: toggle (float)")
+map("n", "<leader>tf", function() Snacks.terminal(nil, { win = { position = "float" } }) end, "Terminal: float")
+map("n", "<leader>th", function() Snacks.terminal(nil, { win = { position = "bottom" } }) end, "Terminal: horizontal")
+map("n", "<leader>tv", function() Snacks.terminal(nil, { win = { position = "right" } }) end, "Terminal: vertical")
 map("t", "<Esc><Esc>", [[<C-\><C-n>]], "Terminal: back to normal mode")
 
 

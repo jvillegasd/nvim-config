@@ -20,6 +20,7 @@ return {
         input = { enabled = true },
         picker = { enabled = true, ui_select = true },
         explorer = { enabled = true },
+        terminal = { enabled = true },
         dashboard = {
             enabled = true,
             preset = {
