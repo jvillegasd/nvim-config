@@ -37,3 +37,7 @@ opt.completeopt = { "menu", "menuone", "noinsert" }
 
 -- Clipboard sync with system
 opt.clipboard = "unnamedplus"
+
+-- Disable unused language providers (silences checkhealth warnings)
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0

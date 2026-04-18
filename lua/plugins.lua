@@ -32,5 +32,6 @@ require("lazy").setup({
   },
   install = { colorscheme = { "catppuccin-mocha", "habamax" } },
   checker = { enabled = true },
+  rocks = { enabled = false },
 })
 

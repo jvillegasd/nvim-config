@@ -18,6 +18,8 @@ BREW_FORMULAE=(
     neovim
     git
     ripgrep
+    fd
+    wget
     lazygit
     tree
     make
