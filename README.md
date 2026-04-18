@@ -274,6 +274,64 @@ Configured in `lua/plugins/lsp.lua`:
 
 Sources: `nvim_lsp`, `luasnip`, `buffer`, `path`. Ghost text enabled.
 
+## Colorscheme
+
+Default: **catppuccin-mocha** (set in `lua/plugins/catppuccin.lua`).
+
+### Verify the scheme is loaded
+
+```vim
+:colorscheme         " prints the active scheme
+:echo g:colors_name  " same thing, lower level
+:Lazy                " catppuccin should show a green dot (loaded)
+```
+
+Both commands should report `catppuccin-mocha`. Visually: a dark warm base
+(`#1e1e2e`), lavender keywords, muted-green strings, muted-purple comments.
+
+### Switch flavour temporarily
+
+```vim
+:colorscheme catppuccin-latte       " light
+:colorscheme catppuccin-frappe
+:colorscheme catppuccin-macchiato
+:colorscheme catppuccin-mocha       " current default
+```
+
+### Change the default permanently
+
+Edit `lua/plugins/catppuccin.lua`:
+
+```lua
+opts = {
+    flavour = "macchiato",  -- latte | frappe | macchiato | mocha
+    ...
+},
+config = function(_, opts)
+    require("catppuccin").setup(opts)
+    vim.cmd.colorscheme("catppuccin-macchiato")
+end,
+```
+
+Both the `flavour` field and the `vim.cmd.colorscheme(...)` call must match.
+
+### Pick from a fuzzy picker
+
+`<leader>fc` opens Telescope's colorscheme picker with live preview — good for
+auditioning other schemes without editing files.
+
+## Sanity checks
+
+| Command | What it tells you |
+|---|---|
+| `:checkhealth` | Nvim + plugin health (python, node, LSP clients, treesitter parsers, …) |
+| `:Lazy` | Plugin installation / load status |
+| `:Lazy log <name>` | Per-plugin error / commit log |
+| `:Mason` | LSP / DAP / formatter installer UI |
+| `:LspInfo` | Clients attached to the current buffer |
+| `:messages` | Recent nvim messages (surface silent errors) |
+| `:verbose nmap <key>` | Which file defined a mapping |
+
 ## Custom C++ snippets
 
 `lua/plugins/luasnip.lua` ships competitive-programming helpers for `.cpp`
@@ -292,3 +350,8 @@ files: `gcd`, `lcm`, `isPrime`, `fori`, `forin`, `convertToBinaryString`, `nCr`,
   `:Lazy sync` and `:MasonInstall lua-language-server pyright ...` manually.
 - **LSP silent on a language not in the ensure_installed list** →
   `lua/plugins/mason.lua` → add to `ensure_installed`, restart nvim.
+- **Colorscheme looks wrong / default black-on-white** → catppuccin didn't load.
+  Check with `:colorscheme` (should print `catppuccin-mocha`) and `:Lazy log
+  catppuccin`. First-launch fix: `:Lazy sync`.
+- **No git signs in the gutter** → not a git-tracked file (gitsigns only signs
+  tracked files), or signcolumn hidden. `:set signcolumn=yes` to force it on.
