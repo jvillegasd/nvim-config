@@ -1,4 +1,4 @@
-icons = {
+_G.icons = {
     misc = {
         dots = "󰇘",
     },

@@ -90,7 +90,7 @@ map("n", "<leader>gB", function() Snacks.gitbrowse() end, "Git: open in browser"
 -- Git hunks (gitsigns) — <leader>gh* + [h / ]h
 local gs = function(fn, ...)
     local args = { ... }
-    return function() require("gitsigns")[fn](unpack(args)) end
+    return function() require("gitsigns")[fn](table.unpack(args)) end
 end
 map("n", "]h", gs("nav_hunk", "next"), "Hunk: next")
 map("n", "[h", gs("nav_hunk", "prev"), "Hunk: previous")
@@ -104,7 +104,7 @@ map("v", "<leader>ghr", function()
 end, "Hunk: reset selection")
 map("n", "<leader>ghS", gs("stage_buffer"), "Hunk: stage buffer")
 map("n", "<leader>ghR", gs("reset_buffer"), "Hunk: reset buffer")
-map("n", "<leader>ghu", gs("undo_stage_hunk"), "Hunk: undo stage")
+map("n", "<leader>ghu", gs("stage_hunk"), "Hunk: undo stage (toggle on staged)")
 map("n", "<leader>ghp", gs("preview_hunk"), "Hunk: preview")
 map("n", "<leader>ghd", gs("diffthis"), "Hunk: diff this")
 map("n", "<leader>ghb", function() require("gitsigns").blame_line({ full = true }) end, "Hunk: blame line")
@@ -123,8 +123,8 @@ map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, "LSP
 map("n", "<leader>ls", vim.lsp.buf.signature_help, "LSP: signature help")
 map("n", "<leader>le", vim.diagnostic.open_float, "LSP: line diagnostic")
 map("n", "<leader>ld", vim.diagnostic.setloclist, "LSP: diagnostic loclist")
-map("n", "[d", vim.diagnostic.goto_prev, "LSP: previous diagnostic")
-map("n", "]d", vim.diagnostic.goto_next, "LSP: next diagnostic")
+map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "LSP: previous diagnostic")
+map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "LSP: next diagnostic")
 
 
 -- DAP — F-keys + <leader>d*

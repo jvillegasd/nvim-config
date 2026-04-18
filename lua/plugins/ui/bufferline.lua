@@ -4,8 +4,8 @@ return {
     event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-        ---@diagnostic disable-next-line: different-requires
         local ctp_theme = require("catppuccin.special.bufferline").get_theme()
+        ---@diagnostic disable-next-line: different-requires
         require("bufferline").setup({
             options = {
                 mode = "buffers",
