@@ -6,7 +6,6 @@ Organization guide for this dotfiles repo. It holds two configs as siblings:
 install.sh                      # macOS bootstrap (brew + symlinks + mason + treesitter)
 README.md                       # User-facing docs
 STRUCTURE.md                    # This file
-reorganize.sh                   # Legacy migration helper (flat → categorized plugins/)
 nvim/                           # → ~/.config/nvim  (symlinked by install.sh)
 ghostty/                        # → ~/.config/ghostty (symlinked by install.sh)
     └── config                  # font, theme, padding, macOS Option-as-Alt
