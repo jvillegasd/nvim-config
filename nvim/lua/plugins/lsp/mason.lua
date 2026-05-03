@@ -13,7 +13,7 @@ return {
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "ts_ls" }, -- Add more LSP servers you need
+                ensure_installed = { "lua_ls", "pyright", "ts_ls", "gopls" }, -- Add more LSP servers you need
             })
 
             vim.lsp.config('lua_ls', {
@@ -48,6 +48,30 @@ return {
                             paramName = "Disable",
                             semicolon = "Disable",
                             arrayIndex = "Disable",
+                        },
+                    },
+                },
+            })
+            --- gopls
+            vim.lsp.config('gopls', {
+                capabilities = capabilities,
+                settings = {
+                    gopls = {
+                        analyses = {
+                            unusedparams = true,
+                            shadow = true,
+                        },
+                        staticcheck = true,
+                        gofumpt = true,
+                        completeUnimported = true,
+                        usePlaceholders = true,
+                        hints = {
+                            assignVariableTypes = true,
+                            compositeLiteralFields = true,
+                            constantValues = true,
+                            functionTypeParameters = true,
+                            parameterNames = true,
+                            rangeVariableTypes = true,
                         },
                     },
                 },
