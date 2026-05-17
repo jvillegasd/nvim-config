@@ -36,6 +36,7 @@ BREW_FORMULAE=(
 
 BREW_CASKS=(
     font-jetbrains-mono-nerd-font
+    font-monocraft
     ghostty
 )
 
@@ -153,7 +154,8 @@ Configs linked:
   $GHOSTTY_CONFIG_DIR  -> $SCRIPT_DIR/ghostty
 
 Next steps:
-  1. Open Ghostty — JetBrainsMono Nerd Font + Catppuccin theme (Mocha/Latte, follows macOS appearance) are wired in via $GHOSTTY_CONFIG_DIR/config.
+  1. Open Ghostty — JetBrainsMono Nerd Font (default) + Catppuccin theme (Mocha/Latte, follows macOS appearance) are wired in via $GHOSTTY_CONFIG_DIR/config.
+     Monocraft is also installed; swap by editing \`font-family\` in that config to \`Monocraft\`.
   2. Launch: nvim
   3. Sanity: :checkhealth   ·   :Lazy   ·   :Mason
 
